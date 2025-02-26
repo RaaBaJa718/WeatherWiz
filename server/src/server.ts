@@ -1,6 +1,6 @@
 import express from 'express';
 import apiRoutes from './routes/api/weatherRoutes';
-import htmlRoutes from './routes/htmlRoutes';
+import htmlRoutes from './routes/api/htmlRoutes';
 import dotenv from 'dotenv';
 
 dotenv.config();

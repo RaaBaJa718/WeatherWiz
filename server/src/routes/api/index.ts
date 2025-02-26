@@ -1,6 +1,6 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import routes from './weatherRoutes';
+import weatherRoutes from './weatherRoutes';
 
 dotenv.config();
 
@@ -11,10 +11,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // Use the routes
-app.use('/api', routes);
+app.use('/api', weatherRoutes);
 
 // Error handling middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
 });

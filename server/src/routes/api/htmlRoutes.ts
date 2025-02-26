@@ -3,7 +3,7 @@ import path from 'path';
 
 const router = Router();
 
-router.get('*', (req, res) => {
+router.get('*', (_, res) => {
     res.sendFile(path.join(__dirname, '../../../index.html'));
 });
 
