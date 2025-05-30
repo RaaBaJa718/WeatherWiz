@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx tsc && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview --host --port $PORT"
   },
   "devDependencies": {
     "typescript": "^5.4.5",
