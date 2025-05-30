@@ -20,7 +20,7 @@ class WeatherService {
     // Fetch location data based on city name
     private async fetchLocationData(query: string): Promise<Coordinates> {
         const response = await axios.get(`${this.baseURL}/weather?q=${query}&appid=${this.apiKey}`);
-        const { lat, lon } = response.data.coord;
+        const { lat, lon } = (response.data as { coord: { lat: number; lon: number } }).coord;
         return { lat, lon };
     }
 
@@ -33,7 +33,8 @@ class WeatherService {
     // Fetch weather data based on coordinates
     private async fetchWeatherData(coordinates: Coordinates): Promise<Weather[]> {
         const response = await axios.get(this.buildWeatherQuery(coordinates));
-        return response.data.list.map((data: any) => ({
+        const data = response.data as { list: any[] };
+        return data.list.map((data: any) => ({
             temperature: data.main.temp,
             description: data.weather[0].description,
             // Map other relevant properties

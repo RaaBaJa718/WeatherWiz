@@ -52,16 +52,18 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
     const geoResponse = await axios.get(
       `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)}&limit=1&appid=${apiKey}`
     );
-    if (!geoResponse.data || geoResponse.data.length === 0) {
+    const geoData = geoResponse.data as any;
+
+    if (!geoData || geoData.length === 0) {
       res.status(404).json({ error: 'City not found' });
       return;
     }
-    const { lat, lon } = geoResponse.data[0];
+    const { lat, lon } = geoData[0];
 
     const weatherResponse = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
     );
-    const weatherData = weatherResponse.data;
+    const weatherData = weatherResponse.data as any;
 
     // Helper to convert Kelvin to Fahrenheit
     const kelvinToF = (k: number) => Math.round((k - 273.15) * 9/5 + 32);
