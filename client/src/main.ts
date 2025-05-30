@@ -47,14 +47,17 @@ const fetchWeather = async (cityName: string) => {
 
   console.log('weatherData: ', weatherData);
 
+  // Handle backend errors
   if (weatherData.error) {
-    // Show error to user (e.g., alert or display in UI)
     alert(weatherData.error);
     return;
   }
 
-  renderCurrentWeather(weatherData[0]);
-  renderForecast(weatherData.slice(1));
+  // weatherData should be an array: [current, ...forecast]
+  const [currentWeather, ...forecast] = weatherData;
+
+  renderCurrentWeather(currentWeather);
+  renderForecast(forecast);
 };
 
 const fetchSearchHistory = async () => {

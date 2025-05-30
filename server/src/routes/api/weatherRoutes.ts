@@ -36,7 +36,7 @@ router.get('/history', (_req: Request, res: Response) => {
 
 // POST /api/weather
 router.post('/', async (req: Request, res: Response): Promise<void> => {
-  const apiKey = process.env.API_KEY; // <-- Move here!
+  const apiKey = process.env.API_KEY;
   const { city } = req.body;
   if (!city) {
     res.status(400).json({ error: 'City is required' });
@@ -63,11 +63,39 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
     );
     const weatherData = weatherResponse.data;
 
+    // Helper to convert Kelvin to Fahrenheit
+    const kelvinToF = (k: number) => Math.round((k - 273.15) * 9/5 + 32);
+
+    // Build current weather object
+    const current = {
+      city,
+      date: weatherData.list[0].dt_txt.split(' ')[0],
+      icon: weatherData.list[0].weather[0].icon,
+      iconDescription: weatherData.list[0].weather[0].description,
+      tempF: kelvinToF(weatherData.list[0].main.temp),
+      windSpeed: weatherData.list[0].wind.speed,
+      humidity: weatherData.list[0].main.humidity,
+    };
+
+    // Build 5-day forecast (one per day at noon)
+    const forecast = weatherData.list
+      .filter((item: any) => item.dt_txt.includes('12:00:00'))
+      .map((item: any) => ({
+        date: item.dt_txt.split(' ')[0],
+        icon: item.weather[0].icon,
+        iconDescription: item.weather[0].description,
+        tempF: kelvinToF(item.main.temp),
+        windSpeed: item.wind.speed,
+        humidity: item.main.humidity,
+      }));
+
+    // Save to history
     const history = readSearchHistory();
     history.push({ id, city, weatherData });
     writeSearchHistory(history);
 
-    res.json(weatherData);
+    // Always respond with an array!
+    res.json([current, ...forecast]);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch weather data' });
   }
