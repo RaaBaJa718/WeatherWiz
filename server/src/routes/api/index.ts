@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import { Router } from 'express';
 import weatherRoutes from './weatherRoutes';
 
 dotenv.config();
@@ -10,8 +11,12 @@ const port = process.env.PORT || 3000;
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
+const router = Router();
+
+router.use('/weather', weatherRoutes);
+
 // Use the routes
-app.use('/api', weatherRoutes);
+app.use('/api', router);
 
 // Error handling middleware
 app.use((err: Error, _req: Request, res: Response) => {
