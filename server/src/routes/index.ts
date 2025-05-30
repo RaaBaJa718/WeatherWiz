@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import weatherRoutes from './routes/api/weatherRoutes';
+import apiRouter from './api';
+
 const router = Router();
 
-// Use the weather routes
-router.use('/weather', weatherRoutes);
+router.use('/api', apiRouter);
 
 export default router;
