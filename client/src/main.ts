@@ -244,7 +244,8 @@ const createHistoryDiv = () => {
 };
 
 const buildHistoryListItem = (city: any) => {
-  const newBtn = createHistoryButton(city.name);
+  // Use city.city instead of city.name
+  const newBtn = createHistoryButton(city.city);
   const deleteBtn = createDeleteButton();
   deleteBtn.dataset.city = JSON.stringify(city);
   const historyDiv = createHistoryDiv();
