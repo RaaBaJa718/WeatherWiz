@@ -30,6 +30,14 @@ WeatherWiz is a full-stack weather dashboard application that allows users to se
 
 ---
 
+## Screenshots
+
+![Screenshot 2025-05-29 233414](https://github.com/user-attachments/assets/2af014d1-157a-41b5-a6d8-69fad6ef1c93)
+![Screenshot 2025-05-29 233432](https://github.com/user-attachments/assets/bb4487e9-63d1-4eb1-82ee-9b496263dc9d)
+![Screenshot 2025-05-29 233448](https://github.com/user-attachments/assets/ae57e972-22e7-4449-86b0-c136c80e16ba)
+
+---
+
 ## Getting Started
 
 ### Prerequisites
