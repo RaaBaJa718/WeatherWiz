@@ -2,10 +2,13 @@ import { Router, Request, Response } from 'express';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 import path from 'path';
 
 const router = Router();
 const apiKey = process.env.API_KEY;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const searchHistoryPath = path.join(__dirname, '../../searchHistory.json');
 
 // Helper function to read search history
