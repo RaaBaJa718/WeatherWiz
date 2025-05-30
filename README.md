@@ -1,57 +1,145 @@
 # WeatherWiz 🌦️
 
-WeatherWiz is a user-friendly weather dashboard application that fetches and displays weather forecasts using the OpenWeather API. Built with TypeScript on the front end and Node.js with Express on the back end, WeatherWiz is designed for efficiency and scalability.
+---
+
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
+---
+
+WeatherWiz is a full-stack weather dashboard application that allows users to search for a city and view the current weather and 5-day forecast. The app also keeps a history of searched cities, which can be deleted individually. The backend is built with Node.js, Express, and TypeScript, and the frontend uses Vite and TypeScript.
+
+---
 
 ## Features
-- **Current Weather**: Get up-to-date weather information for your location.
-- **5-Day Forecast**: Plan ahead with a 5-day weather forecast.
-- **Geolocation**: Automatically fetch weather data based on your current location.
-- **Search**: Look up weather information for any city in the world.
-- **Responsive Design**: Enjoy a seamless experience on both desktop and mobile devices.
 
-## Installation
-1. **Clone the repository**:
+- Search for any city to get current weather and a 5-day forecast
+- View and manage search history
+- Responsive and modern UI
+- Caching of search results for faster repeated lookups
+- Deployed on [Render](https://weatherwiz-1-45ot.onrender.com)
+- Live Demo: [https://weatherwiz-1-45ot.onrender.com](https://weatherwiz-1-45ot.onrender.com)
+
+---
+
+## Tech Stack
+
+- **Frontend:** Vite, TypeScript, HTML, CSS
+- **Backend:** Node.js, Express, TypeScript
+- **API:** [OpenWeatherMap](https://openweathermap.org/api)
+- **Deployment:** Render
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm
+
+### Clone the Repository
+
+```sh
+git clone https://github.com/yourusername/weatherwiz.git
+cd weatherwiz
+```
+
+---
+
+### Backend Setup
+
+1. Go to the server directory:
     ```sh
-    git clone https://github.com/yourusername/WeatherWiz.git
+    cd server
     ```
 
-2. **Navigate to the project directory**:
-    ```sh
-    cd WeatherWiz
-    ```
-
-3. **Install dependencies**:
+2. Install dependencies:
     ```sh
     npm install
     ```
 
-4. **Create a `.env` file in the root directory and add your OpenWeather API key**:
-    ```sh
-    API_KEY=your_openweather_api_key
+3. Create a `.env` file in the `server` directory:
+    ```
+    API_KEY=your_openweathermap_api_key
     ```
 
-5. **Start the development server**:
+4. Build and start the server:
     ```sh
+    npm run build
     npm start
     ```
 
-## Usage
-Open your browser and navigate to `http://localhost:3000`. Enter a city name or use geolocation to fetch weather data.
-
-## API
-- **GET** `/api/weather?lat={lat}&lon={lon}`: Fetch weather data for the specified latitude and longitude.
-
-## License
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Contributing
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
-
-## Contact
-For any inquiries, please reach out to [your-email@example.com](mailto:your-email@example.com).
+   The backend will run on `http://localhost:3001` by default.
 
 ---
 
+### Frontend Setup
+
+1. Open a new terminal and go to the client directory:
+    ```sh
+    cd client
+    ```
+
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
+
+3. (Optional) Create a `.env` file for local API proxy (leave blank for proxy):
+    ```
+    VITE_API_URL=
+    ```
+
+4. Start the development server:
+    ```sh
+    npm run dev
+    ```
+
+   The frontend will run on `http://localhost:3000` by default.
+
+---
+
+## Deployment
+
+### On Render
+
+- **Backend:** Deploy the `server` folder as a web service. Set the build command to `npm install && npm run build` and the start command to `npm start`. Add your `API_KEY` as an environment variable.
+- **Frontend:** Deploy the `client` folder as a static site or web service. Set the build command to `npm install && npm run build` and the start command to `npm run preview`. Set the environment variable `VITE_API_URL` to your backend’s Render URL (e.g., `https://your-backend.onrender.com`).
+- **Frontend:** [https://weatherwiz-1-45ot.onrender.com](https://weatherwiz-1-45ot.onrender.com)
+- **Backend:** [https://your-backend-service.onrender.com](https://your-backend-service.onrender.com)
+
+---
+
+## Environment Variables
+
+**Backend (`server/.env`):**
+```
+API_KEY=your_openweathermap_api_key
+```
+
+**Frontend (`client/.env` for production on Render):**
+```
+VITE_API_URL=https://your-backend.onrender.com
+```
+
+---
+
+## Usage
+
+1. Enter a city name in the search bar and submit.
+2. View the current weather and 5-day forecast.
+3. Your search history will appear below the search bar. Click a city to view its weather again, or click the trash icon to remove it from history.
+
+---
+
+## License
+
+MIT
+
+---
+
+## Acknowledgments
+
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- [Render](https://render.com/)
 Happy coding! 🚀
