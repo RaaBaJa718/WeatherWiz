@@ -40,12 +40,18 @@ const fetchWeather = async (cityName: string) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ cityName }),
+    body: JSON.stringify({ city: cityName }),
   });
 
   const weatherData = await response.json();
 
   console.log('weatherData: ', weatherData);
+
+  if (weatherData.error) {
+    // Show error to user (e.g., alert or display in UI)
+    alert(weatherData.error);
+    return;
+  }
 
   renderCurrentWeather(weatherData[0]);
   renderForecast(weatherData.slice(1));
