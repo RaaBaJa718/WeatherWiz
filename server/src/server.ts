@@ -23,3 +23,5 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+console.log('API_KEY:', process.env.API_KEY);

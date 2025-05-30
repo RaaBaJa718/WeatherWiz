@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 const router = Router();
-const apiKey = process.env.API_KEY;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const searchHistoryPath = path.join(__dirname, '../../searchHistory.json');
@@ -37,6 +36,7 @@ router.get('/history', (_req: Request, res: Response) => {
 
 // POST /api/weather
 router.post('/', async (req: Request, res: Response): Promise<void> => {
+  const apiKey = process.env.API_KEY; // <-- Move here!
   const { city } = req.body;
   if (!city) {
     res.status(400).json({ error: 'City is required' });
