@@ -34,8 +34,10 @@ API Calls
 
 */
 
+const apiBase = import.meta.env.VITE_API_URL || '';
+
 const fetchWeather = async (cityName: string) => {
-  const response = await fetch('/api/weather/', {
+  const response = await fetch(`${apiBase}/api/weather/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
